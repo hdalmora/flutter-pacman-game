@@ -47,7 +47,9 @@ class _MainSceneState extends State<MainScene> {
                                 decoration: TextDecoration.none,
                               ),),
                             ),
-                            Text("${10000}", style: TextStyle( //TODO: IMPLEMENT GAME POINTS
+                            Text(
+                              "${game != null ? game.gameMapController.player.points : "0"}",
+                              style: TextStyle(
                               fontSize: 32,
                               color: Colors.black,
                               decoration: TextDecoration.none,

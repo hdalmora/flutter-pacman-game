@@ -13,9 +13,14 @@ class Player extends Component {
   Point _position;
   Point _targetLocation;
   bool _died = false;
+  int _points = 0;
 
+  set addPoints(int points) {
+    _points += points;
+  }
+
+  int get points => _points;
   Point get position => _position;
-
   Rect get rect => _playerRect;
   bool get died => _died;
 
@@ -34,6 +39,7 @@ class Player extends Component {
   void die() {
     _position = null;
     _died = true;
+    _points = 0;
   }
 
   void render(Canvas canvas) {

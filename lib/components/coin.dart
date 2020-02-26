@@ -32,17 +32,17 @@ class Coin extends Component {
       game.gameMapController.addCoinToRemove = this;
 
     } else {
-      if(this.rect.contains(game.gameMapController.player.rect.bottomCenter) ||
-          this.rect.contains(game.gameMapController.player.rect.bottomLeft)  ||
-          this.rect.contains(game.gameMapController.player.rect.bottomRight) ||
-          this.rect.contains(game.gameMapController.player.rect.topCenter)   ||
-          this.rect.contains(game.gameMapController.player.rect.topLeft)     ||
-          this.rect.contains(game.gameMapController.player.rect.topRight)) {
-        this.consumed = true;
-        //TODO: ADD POINTS TO USER
+      if(!game.gameMapController.player.died) {
+        if(this.rect.contains(game.gameMapController.player.rect.bottomCenter) ||
+            this.rect.contains(game.gameMapController.player.rect.bottomLeft)  ||
+            this.rect.contains(game.gameMapController.player.rect.bottomRight) ||
+            this.rect.contains(game.gameMapController.player.rect.topCenter)   ||
+            this.rect.contains(game.gameMapController.player.rect.topLeft)     ||
+            this.rect.contains(game.gameMapController.player.rect.topRight)) {
+          this.consumed = true;
+          game.addPoints();
+        }
       }
     }
-
-
   }
 }

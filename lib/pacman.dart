@@ -46,6 +46,12 @@ class PacMan extends BaseGame with VerticalDragDetector, HorizontalDragDetector 
   void die() {
     _gameMapController.player.die();
     onPlayerDead();
+    onStateChanged();
+  }
+
+  void addPoints() {
+    _gameMapController.player.addPoints = 15;
+    onStateChanged();
   }
 
   @override
