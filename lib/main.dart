@@ -2,10 +2,8 @@ import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_pacman/pacman.dart';
 
 import 'Game.dart';
-import 'mainScene.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flutter_pacman/pacman.dart';
+import 'components/ghost.dart';
 import 'components/ground.dart';
 import 'components/player.dart';
 import 'components/wall.dart';
@@ -11,7 +12,7 @@ class MapTiles  {
   static const GROUND = 0;
 }
 
-class GameMap {
+class GameMapController {
   List<List<int>> _mapDefinition = [
     [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1 ],
     [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
@@ -36,10 +37,14 @@ class GameMap {
   final PacMan game;
   Map<Point, Component> _map;
   Player _player;
+  List<Ghost> _ghosts = List();
 
-  GameMap(this.game) {
+  Map<Point, Component> get map => _map;
+
+  GameMapController(this.game) {
     _initGameMap();
     _addPlayer();
+    _addGhosts();
   }
 
   void _initGameMap() {
@@ -71,15 +76,41 @@ class GameMap {
     }
   }
 
+  void _addGhosts() {
+    if(_map.isNotEmpty) {
+      _ghosts.add(Ghost(game, 6, 3));
+      _ghosts.add(Ghost(game, 7, 3));
+      _ghosts.add(Ghost(game, 8, 3));
+    }
+  }
+
   void render(Canvas c) {
     _map.forEach((position, component) {
       component.render(c);
     });
     _player.render(c);
+
+    if(_ghosts.length > 0) {
+      _ghosts.forEach((ghost) {
+        ghost.render(c);
+      });
+    }
   }
 
   void update(double t) {
     _player.update(t);
+    _ghosts.forEach((ghost) {
+      ghost.update(t);
+
+      if(_player.rect.contains(ghost.rect.bottomCenter) ||
+          _player.rect.contains(ghost.rect.bottomLeft)  ||
+          _player.rect.contains(ghost.rect.bottomRight) ||
+          _player.rect.contains(ghost.rect.topCenter)   ||
+          _player.rect.contains(ghost.rect.topLeft)     ||
+          _player.rect.contains(ghost.rect.topRight)) {
+        print("DIED");
+      }
+    });
   }
 
   void managePlayerMovement(String direction) {
@@ -112,10 +143,6 @@ class GameMap {
       return;
     }
 
-//    if (_map[targetPoint] is Ghost) {
-//      die();
-//    }
-
     if (targetPoint.x < 0) {
       targetPoint = Point(_player.position.x + game.gameColumns - 1, _player.position.y);
     }
@@ -131,11 +158,6 @@ class GameMap {
     if (targetPoint.y > game.gameRows - 1) {
       targetPoint = Point(_player.position.x, _player.position.y - game.gameColumns + 2);
     }
-
-//    if (map[targetPoint] is Food) {
-//      points += 10;
-//      onStateChanged();
-//    }
 
     _player.targetLocation = targetPoint;
   }

@@ -19,6 +19,13 @@ class _MainSceneState extends State<MainScene> {
   final StreamController resetGame = StreamController();
 
   @override
+  void dispose() async {
+    gamesStarted.close();
+    resetGame.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(

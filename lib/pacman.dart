@@ -1,5 +1,7 @@
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:flame/components/component.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game/game.dart';
 import 'package:flame/gestures.dart';
@@ -15,7 +17,9 @@ class PacMan extends Game with VerticalDragDetector, HorizontalDragDetector {
   VoidCallback onStateChanged;
   VoidCallback onPlayerDead;
 
-  GameMap gameMap;
+  GameMapController _gameMapController;
+  
+  GameMapController get gameMapController => _gameMapController;
 
   PacMan({
     this.onStateChanged,
@@ -26,7 +30,7 @@ class PacMan extends Game with VerticalDragDetector, HorizontalDragDetector {
 
   void initialize() async {
     resize(await Flame.util.initialDimensions());
-    gameMap = GameMap(this);
+    _gameMapController = GameMapController(this);
   }
 
 
@@ -36,14 +40,14 @@ class PacMan extends Game with VerticalDragDetector, HorizontalDragDetector {
       return;
     }
 
-    if(gameMap != null)
-      gameMap.render(canvas);
+    if(_gameMapController != null)
+      _gameMapController.render(canvas);
   }
 
   @override
   void update(double t) {
-    if(gameMap != null)
-      gameMap.update(t);
+    if(_gameMapController != null)
+      _gameMapController.update(t);
   }
 
   @override
@@ -65,10 +69,10 @@ class PacMan extends Game with VerticalDragDetector, HorizontalDragDetector {
 
     if(velocity < 0) {
       // up
-      gameMap.managePlayerMovement("DOWN");
+      _gameMapController.managePlayerMovement("DOWN");
     } else {
       // down
-      gameMap.managePlayerMovement("UP");
+      _gameMapController.managePlayerMovement("UP");
     }
   }
 
@@ -78,10 +82,10 @@ class PacMan extends Game with VerticalDragDetector, HorizontalDragDetector {
 
     if(velocity < 0) {
       // left
-      gameMap.managePlayerMovement("LEFT");
+      _gameMapController.managePlayerMovement("LEFT");
     } else {
       // right
-      gameMap.managePlayerMovement("RIGHT");
+      _gameMapController.managePlayerMovement("RIGHT");
     }
   }
 }

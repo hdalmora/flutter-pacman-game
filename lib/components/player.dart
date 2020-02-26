@@ -17,6 +17,8 @@ class Player extends Component {
 
   Point get position => _position;
 
+  Rect get rect => _playerRect;
+
   set targetLocation (Point targetPoint) {
     _targetLocation = targetPoint;
   }
