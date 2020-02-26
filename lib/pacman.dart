@@ -8,7 +8,7 @@ import 'package:flame/gestures.dart';
 import 'package:flutter/material.dart';
 import 'game_map.dart';
 
-class PacMan extends Game with VerticalDragDetector, HorizontalDragDetector {
+class PacMan extends BaseGame with VerticalDragDetector, HorizontalDragDetector {
   Size screenSize;
   final gameColumns = 19;
   final gameRows = 18;
@@ -42,12 +42,16 @@ class PacMan extends Game with VerticalDragDetector, HorizontalDragDetector {
 
     if(_gameMapController != null)
       _gameMapController.render(canvas);
+
+    super.render(canvas);
   }
 
   @override
   void update(double t) {
     if(_gameMapController != null)
       _gameMapController.update(t);
+
+    super.update(t);
   }
 
   @override

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flutter_pacman/pacman.dart';
+import 'components/coin.dart';
 import 'components/ghost.dart';
 import 'components/ground.dart';
 import 'components/player.dart';
@@ -12,7 +13,7 @@ class MapTiles  {
   static const GROUND = 0;
 }
 
-class GameMapController {
+class GameMapController extends Component {
   List<List<int>> _mapDefinition = [
     [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1 ],
     [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
@@ -38,8 +39,16 @@ class GameMapController {
   Map<Point, Component> _map;
   Player _player;
   List<Ghost> _ghosts = List();
+  List<Coin> _coins = List();
+  List<Coin> _coinsToRemove = List();
+
+  set addCoinToRemove(Coin coin) {
+    _coinsToRemove.add(coin);
+  }
 
   Map<Point, Component> get map => _map;
+  Player get player => _player;
+  List<Coin> get coins => _coins;
 
   GameMapController(this.game) {
     _initGameMap();
@@ -60,6 +69,7 @@ class GameMapController {
           break;
           case MapTiles.GROUND:
             gameMap[Point(x, y)] = Ground(game, posX, posY);
+            _coins.add(Coin(game, posX, posY));
           break;
           default:
             gameMap[Point(x, y)] = Ground(game, posX, posY);
@@ -68,6 +78,10 @@ class GameMapController {
       }
     }
     this._map = gameMap;
+  }
+
+  void removeCoin(Coin coin) {
+    _coins.remove(coin);
   }
 
   void _addPlayer() {
@@ -84,11 +98,18 @@ class GameMapController {
     }
   }
 
+  @override
   void render(Canvas c) {
     _map.forEach((position, component) {
       component.render(c);
     });
     _player.render(c);
+
+    if(_coins.length > 0) {
+      _coins.forEach((coin) {
+        coin.render(c);
+      });
+    }
 
     if(_ghosts.length > 0) {
       _ghosts.forEach((ghost) {
@@ -97,20 +118,23 @@ class GameMapController {
     }
   }
 
+  @override
   void update(double t) {
     _player.update(t);
+
     _ghosts.forEach((ghost) {
       ghost.update(t);
-
-      if(_player.rect.contains(ghost.rect.bottomCenter) ||
-          _player.rect.contains(ghost.rect.bottomLeft)  ||
-          _player.rect.contains(ghost.rect.bottomRight) ||
-          _player.rect.contains(ghost.rect.topCenter)   ||
-          _player.rect.contains(ghost.rect.topLeft)     ||
-          _player.rect.contains(ghost.rect.topRight)) {
-        print("DIED");
-      }
     });
+
+    _coins.forEach((coin) {
+      coin.update(t);
+    });
+
+    // Remove coins consumed
+    if(_coinsToRemove.isNotEmpty) {
+      _coins.removeWhere((coin) => _coinsToRemove.contains(coin));
+      _coinsToRemove.clear();
+    }
   }
 
   void managePlayerMovement(String direction) {

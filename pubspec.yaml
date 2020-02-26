@@ -25,5 +25,6 @@ flutter:
   assets:
     - assets/images/wall.png
     - assets/images/ground.png
+    - assets/images/coin.png
     - assets/images/pacman/pacman_idle.png
     - assets/images/enemies/ghosts/ghost_1.png

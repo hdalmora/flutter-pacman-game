@@ -13,8 +13,6 @@ class Player extends Component {
   Point _position;
   Point _targetLocation;
 
-  double get speed => _game.tileWidth * 3;
-
   Point get position => _position;
 
   Rect get rect => _playerRect;

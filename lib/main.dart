@@ -14,6 +14,7 @@ void main() {
   Flame.images.loadAll(<String>[
     'ground.png',
     'wall.png',
+    'coin.png',
     'enemies/ghosts/ghost_1.png',
     'pacman/pacman_idle.png',
   ]);

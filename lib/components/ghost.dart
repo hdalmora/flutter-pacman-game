@@ -33,7 +33,7 @@ class Ghost extends Component {
 
     elapsedTime += t;
 
-    if (elapsedTime > .7 ) { 
+    if (elapsedTime > .7 ) {
 
       var oldPosition = position;
       var newPoint;
@@ -55,6 +55,16 @@ class Ghost extends Component {
         elapsedTime = 0;
       } while((game.gameMapController.map[newPoint] is Wall || game.gameMapController.map[newPoint] is Ghost) ||
           (newPoint.x > game.gameColumns || newPoint.x < 0 || newPoint.y > game.gameRows || newPoint.y < 0));
+    }
+
+    if(game.gameMapController.player.rect.contains(this.rect.bottomCenter) ||
+        game.gameMapController.player.rect.contains(this.rect.bottomLeft)  ||
+        game.gameMapController.player.rect.contains(this.rect.bottomRight) ||
+        game.gameMapController.player.rect.contains(this.rect.topCenter)   ||
+        game.gameMapController.player.rect.contains(this.rect.topLeft)     ||
+        game.gameMapController.player.rect.contains(this.rect.topRight)) {
+      print("DIED");
+      // TODO: Kill player
     }
   }
 }
