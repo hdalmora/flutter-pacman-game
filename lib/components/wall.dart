@@ -11,7 +11,7 @@ class Wall extends Component {
 
   Wall(String spritePath, this.game, double x, double y) {
     sprite = Sprite(spritePath);
-    wallRect = Rect.fromLTWH(x, y, game.tileWidth/1.2, game.tileHeight/1.2);
+    wallRect = Rect.fromLTWH(x, y, game.tileWidth/1.1, game.tileHeight/1.1);
   }
 
   @override

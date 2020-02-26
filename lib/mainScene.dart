@@ -32,6 +32,7 @@ class _MainSceneState extends State<MainScene> {
         body: Stack(
           children: <Widget>[
             Container(
+              margin: EdgeInsets.only(top: 25.0),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: Column(
