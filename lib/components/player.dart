@@ -12,10 +12,12 @@ class Player extends Component {
   PacMan _game;
   Point _position;
   Point _targetLocation;
+  bool _died = false;
 
   Point get position => _position;
 
   Rect get rect => _playerRect;
+  bool get died => _died;
 
   set targetLocation (Point targetPoint) {
     _targetLocation = targetPoint;
@@ -27,6 +29,11 @@ class Player extends Component {
 
     _playerRect = Rect.fromLTWH(_position.x * game.tileWidth, _position.y * _game.tileHeight, _game.tileWidth / 1.5,
         _game.tileHeight / 1.5);
+  }
+
+  void die() {
+    _position = null;
+    _died = true;
   }
 
   void render(Canvas canvas) {
@@ -44,5 +51,9 @@ class Player extends Component {
       _position = _targetLocation; // update player position with target
       _targetLocation = null;
     }
+
+//    if(_position == null && _died == true) {
+//      _playerRect.
+//    }
   }
 }

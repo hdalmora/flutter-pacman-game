@@ -1,7 +1,4 @@
-import 'dart:math';
 import 'dart:ui';
-
-import 'package:flame/components/component.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game/game.dart';
 import 'package:flame/gestures.dart';
@@ -22,7 +19,7 @@ class PacMan extends BaseGame with VerticalDragDetector, HorizontalDragDetector 
   GameMapController get gameMapController => _gameMapController;
 
   PacMan({
-    this.onStateChanged,
+    this.onStateChanged, // called when adding points
     this.onPlayerDead,
   }) {
     initialize();
@@ -44,6 +41,11 @@ class PacMan extends BaseGame with VerticalDragDetector, HorizontalDragDetector 
       _gameMapController.render(canvas);
 
     super.render(canvas);
+  }
+
+  void die() {
+    _gameMapController.player.die();
+    onPlayerDead();
   }
 
   @override

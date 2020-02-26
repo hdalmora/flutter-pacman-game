@@ -57,14 +57,15 @@ class Ghost extends Component {
           (newPoint.x > game.gameColumns || newPoint.x < 0 || newPoint.y > game.gameRows || newPoint.y < 0));
     }
 
-    if(game.gameMapController.player.rect.contains(this.rect.bottomCenter) ||
-        game.gameMapController.player.rect.contains(this.rect.bottomLeft)  ||
-        game.gameMapController.player.rect.contains(this.rect.bottomRight) ||
-        game.gameMapController.player.rect.contains(this.rect.topCenter)   ||
-        game.gameMapController.player.rect.contains(this.rect.topLeft)     ||
-        game.gameMapController.player.rect.contains(this.rect.topRight)) {
-      print("DIED");
-      // TODO: Kill player
+    if(!game.gameMapController.player.died) {
+      if(game.gameMapController.player.rect.contains(this.rect.bottomCenter) ||
+          game.gameMapController.player.rect.contains(this.rect.bottomLeft)  ||
+          game.gameMapController.player.rect.contains(this.rect.bottomRight) ||
+          game.gameMapController.player.rect.contains(this.rect.topCenter)   ||
+          game.gameMapController.player.rect.contains(this.rect.topLeft)     ||
+          game.gameMapController.player.rect.contains(this.rect.topRight)) {
+        game.die();
+      }
     }
   }
 }
