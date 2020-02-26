@@ -28,6 +28,7 @@ flutter:
         - asset: assets/fonts/8_bit_madness.ttf
 
   assets:
+    - assets/images/arrows.png
     - assets/images/wall/wall_down_close_left.png
     - assets/images/wall/wall_down_close_right.png
     - assets/images/wall/wall_down.png

@@ -9,7 +9,7 @@ class Game extends StatelessWidget {
       title: 'PacMan Game',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        accentColor: Colors.black,
+        primarySwatch: Colors.blue,
         fontFamily: '8BitMadness',
       ),
       initialRoute: MainScene.routeName,
