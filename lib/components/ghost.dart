@@ -54,7 +54,7 @@ class Ghost extends Component {
         position = newPoint;
         elapsedTime = 0;
       } while((game.gameMapController.map[newPoint] is Wall || game.gameMapController.map[newPoint] is Ghost) ||
-          (newPoint.x > game.gameColumns || newPoint.x < 0 || newPoint.y > game.gameRows || newPoint.y < 0));
+          (newPoint.x > game.gameColumns - 1 || newPoint.x < 0 || newPoint.y > game.gameRows  - 1|| newPoint.y < 0));
     }
 
     if(!game.gameMapController.player.died) {

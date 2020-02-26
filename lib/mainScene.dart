@@ -138,17 +138,17 @@ class _MainSceneState extends State<MainScene> {
                           Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white.withAlpha(100),
-                            size: 40,
+                            size: 24,
                           ),
                           Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white.withAlpha(180),
-                            size: 40,
+                            size: 24,
                           ),
                           Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white.withAlpha(255),
-                            size: 40,
+                            size: 24,
                           ),
                         ],
                       ),

@@ -57,9 +57,5 @@ class Player extends Component {
       _position = _targetLocation; // update player position with target
       _targetLocation = null;
     }
-
-//    if(_position == null && _died == true) {
-//      _playerRect.
-//    }
   }
 }
