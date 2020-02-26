@@ -1,0 +1,29 @@
+name: flutter_pacman
+description: Cloning the PacMan game with Flutter!
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  flame: ^0.18.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/wall.png
+    - assets/images/ground.png
+    - assets/images/pacman/pacman_idle.png
+    - assets/images/enemies/ghosts/ghost_1.png
