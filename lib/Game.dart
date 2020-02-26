@@ -7,9 +7,10 @@ class Game extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PacMan Game',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         accentColor: Colors.black,
-        fontFamily: 'SF Pro Display',
+        fontFamily: '8BitMadness',
       ),
       initialRoute: MainScene.routeName,
       routes: {

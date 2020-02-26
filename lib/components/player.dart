@@ -32,8 +32,8 @@ class Player extends Component {
     this._game = game;
     _position = Point(7.0, 10.0); // starting position
 
-    _playerRect = Rect.fromLTWH(_position.x * game.tileWidth, _position.y * _game.tileHeight, _game.tileWidth / 1.5,
-        _game.tileHeight / 1.5);
+    _playerRect = Rect.fromLTWH((_position.x * game.tileWidth),
+        (_position.y * _game.tileHeight), _game.tileWidth / 1.5, _game.tileHeight / 1.5);
   }
 
   void die() {

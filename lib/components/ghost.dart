@@ -3,12 +3,11 @@ import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter_pacman/components/wall.dart';
-
 import '../pacman.dart';
 
 class Ghost extends Component {
   final PacMan game;
-  Sprite sprite = Sprite('enemies/ghosts/ghost_1.png');
+  Sprite sprite;
   Rect ghostRect;
 
   Point position;
@@ -18,9 +17,10 @@ class Ghost extends Component {
 
   Rect get rect => ghostRect;
 
-  Ghost(this.game, double x, double y) {
+  Ghost(String spritePath, this.game, double x, double y) {
+    sprite = Sprite(spritePath);
     position = Point(x, y);
-    ghostRect = Rect.fromLTWH(x * game.tileWidth, y * game.tileHeight, game.tileWidth, game.tileHeight);
+    ghostRect = Rect.fromLTWH(x * game.tileWidth, y * game.tileHeight, game.tileWidth/1.3, game.tileHeight/1.3);
   }
 
   @override

@@ -6,11 +6,12 @@ import '../pacman.dart';
 
 class Wall extends Component {
   final PacMan game;
-  Sprite sprite = Sprite('wall.png');
+  Sprite sprite;
   Rect wallRect;
 
-  Wall(this.game, double x, double y) {
-    wallRect = Rect.fromLTWH(x, y, game.tileWidth, game.tileHeight);
+  Wall(String spritePath, this.game, double x, double y) {
+    sprite = Sprite(spritePath);
+    wallRect = Rect.fromLTWH(x, y, game.tileWidth/1.2, game.tileHeight/1.2);
   }
 
   @override

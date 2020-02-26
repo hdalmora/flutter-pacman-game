@@ -17,7 +17,7 @@ class Coin extends Component {
   Rect get rect => coinRect;
 
   Coin(this.game, double x, double y) {
-    coinRect = Rect.fromLTWH(x, y, game.tileWidth/4, game.tileHeight/4);
+    coinRect = Rect.fromLTWH(x + (8 * game.tileWidth) / 20, y + (8 * game.tileHeight) / 20, game.tileWidth/10, game.tileHeight/10);
     _consumed = false;
   }
 
@@ -33,12 +33,12 @@ class Coin extends Component {
 
     } else {
       if(!game.gameMapController.player.died) {
-        if(this.rect.contains(game.gameMapController.player.rect.bottomCenter) ||
-            this.rect.contains(game.gameMapController.player.rect.bottomLeft)  ||
-            this.rect.contains(game.gameMapController.player.rect.bottomRight) ||
-            this.rect.contains(game.gameMapController.player.rect.topCenter)   ||
-            this.rect.contains(game.gameMapController.player.rect.topLeft)     ||
-            this.rect.contains(game.gameMapController.player.rect.topRight)) {
+        if(game.gameMapController.player.rect.contains(this.rect.bottomCenter) ||
+            game.gameMapController.player.rect.contains(this.rect.bottomLeft)  ||
+            game.gameMapController.player.rect.contains(this.rect.bottomRight) ||
+            game.gameMapController.player.rect.contains(this.rect.topCenter)   ||
+            game.gameMapController.player.rect.contains(this.rect.topLeft)     ||
+            game.gameMapController.player.rect.contains(this.rect.topRight)) {
           this.consumed = true;
           game.addPoints();
         }
